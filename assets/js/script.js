@@ -8,6 +8,7 @@ let answerResult = document.querySelector("#answerResult");
 
 // Variables
 let takingQuiz = false;
+let questionIndex = -1;
 
 // Create questions array and add questions
 let questions = [];
@@ -42,7 +43,7 @@ function hideBtnStartQuiz() { btnStartQuiz.style.display = "none"; }
 
 function unhideBtnStartQuiz() { btnStartQuiz.style.display = "inline-block"; }
 
-function displayOptions(questionIndex) {
+function displayOptions() {
     divOptions.style.display = "block";
     let optionsList = questions[questionIndex].options;
 
@@ -50,7 +51,7 @@ function displayOptions(questionIndex) {
         console.log("Option ", i);
         let option = document.createElement("p");
         option.textContent = optionsList[i];
-        option.id = "option " + i;
+        option.id = "option" + i;
         divOptions.appendChild(option);
     }
 }
@@ -58,7 +59,7 @@ function displayOptions(questionIndex) {
 function displayQuestion() {
     questionIndex = Math.floor(Math.random() * questions.length);
     heading.textContent = questions[questionIndex].question;
-    displayOptions(questionIndex);
+    displayOptions();
 }
 
 // Event handlers
@@ -78,7 +79,15 @@ function handleStartQuiz() {
 }
 
 function handleOptionClick(event) {
-    
+    let playerAnswer = document.querySelector("#" + event.target.id).textContent;
+    horizonalRule.style.display = "block";
+    if(playerAnswer === questions[questionIndex].answer) {
+        answerResult.textContent = "Correct";
+    }
+    else {
+        answerResult.textContent = "Incorrect";
+    }
+    answerResult.style.display = "block";
 }
 
 btnStartQuiz.addEventListener("click", handleStartQuiz);
