@@ -3,6 +3,8 @@ let btnStartQuiz = document.querySelector("#btnStartQuiz");
 let heading = document.querySelector("#heading");
 let rules = document.querySelector("#rules");
 let divOptions = document.querySelector("#options");
+let horizonalRule = document.querySelector("hr");
+let answerResult = document.querySelector("#answerResult");
 
 // Variables
 let takingQuiz = false;
@@ -44,17 +46,22 @@ function displayOptions(questionIndex) {
     divOptions.style.display = "block";
     let optionsList = questions[questionIndex].options;
 
-    for(let i = 0; i < options.length; i++) {
-        // divOptions.appendChild(document.createElement());
+    for(let i = 0; i < optionsList.length; i++) {
+        console.log("Option ", i);
+        let option = document.createElement("p");
+        option.textContent = optionsList[i];
+        option.id = "option " + i;
+        divOptions.appendChild(option);
     }
 }
 
 function displayQuestion() {
     questionIndex = Math.floor(Math.random() * questions.length);
     heading.textContent = questions[questionIndex].question;
-    displayOptions();
+    displayOptions(questionIndex);
 }
 
+// Event handlers
 function handleStartQuiz() {
     if(!takingQuiz) {
         hideRules();
@@ -70,4 +77,9 @@ function handleStartQuiz() {
     }
 }
 
+function handleOptionClick(event) {
+    
+}
+
 btnStartQuiz.addEventListener("click", handleStartQuiz);
+divOptions.addEventListener("click", handleOptionClick);
