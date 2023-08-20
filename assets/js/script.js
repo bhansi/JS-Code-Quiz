@@ -9,9 +9,10 @@ let answerResult = document.querySelector("#answerResult");
 
 // Variables
 let timeRemaining = 75;
-let answerResultTimer = 3;
 let takingQuiz = false;
 let questionIndex = -1;
+let answerResultTimer = 3;
+let answered = false;
 
 // Create questions array
 let questions = [];
@@ -73,6 +74,8 @@ function startTimer() {
         if(timeRemaining === 0) {
             clearInterval(timerInterval);
         }
+
+        // Only decrement this timer if the answerResult is visible to the user
         if(horizonalRule.style.display === "block") {
             answerResultTimer--;
         }
@@ -80,6 +83,9 @@ function startTimer() {
             horizonalRule.style.display = "none";
             answerResult.style.display = "none"
             answerResultTimer = 3;
+            answered = false;
+            questions.splice(questionIndex, 1);
+            displayQuestion();
         }
     }, 1000);
 }
@@ -103,6 +109,9 @@ function handleStartQuiz() {
 }
 
 function handleOptionClick(event) {
+    if(answered) { return; }
+    else { answered = true; }
+
     let playerAnswer = document.querySelector("#" + event.target.id).textContent;
 
     horizonalRule.style.display = "block";
