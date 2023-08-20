@@ -53,10 +53,11 @@ function displayOptions() {
     let optionsList = questions[questionIndex].options;
 
     for(let i = 0; i < optionsList.length; i++) {
-        let option = document.createElement("p");
-        option.textContent = optionsList[i];
-        option.id = "option" + i;
-        divOptions.appendChild(option);
+        document.querySelector("#option" + i).textContent = optionsList[i];
+        // let option = document.createElement("p");
+        // option.textContent = optionsList[i];
+        // option.id = "option" + i;
+        // divOptions.appendChild(option);
     }
 }
 
@@ -68,17 +69,17 @@ function displayQuestion() {
 
 function startTimer() {
     let timerInterval = setInterval(function() {
-        timeRemaining--;
-        timer.textContent = "Time: " + timeRemaining;
         
-        if(timeRemaining === 0) {
-            clearInterval(timerInterval);
-        }
-
         // Only decrement this timer if the answerResult is visible to the user
         if(horizonalRule.style.display === "block") {
             answerResultTimer--;
         }
+        else {
+            timeRemaining--;
+        }
+
+        timer.textContent = "Time: " + timeRemaining;
+        
         if(answerResultTimer === 0) {
             horizonalRule.style.display = "none";
             answerResult.style.display = "none"
@@ -86,6 +87,10 @@ function startTimer() {
             answered = false;
             questions.splice(questionIndex, 1);
             displayQuestion();
+        }
+        
+        if(timeRemaining === 0) {
+            clearInterval(timerInterval);
         }
     }, 1000);
 }
