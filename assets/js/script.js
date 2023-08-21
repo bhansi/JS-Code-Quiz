@@ -14,6 +14,7 @@ let divHighscores = document.querySelector("#highscores");
 let divHighscoresList = document.querySelector("#highscoresList");
 let btnGoBack = document.querySelector("#goBack");
 let btnClearHighscores = document.querySelector("#clearHighscores");
+let anchorViewHighscores = document.querySelector("#viewHighscores");
 
 // Variables
 let timeRemaining = 75;
@@ -244,8 +245,16 @@ function handleClearHighscores() {
     localStorage.clear();
 }
 
+function handleViewHighscores() {
+    hideQuiz();
+    unhideHighscores();
+    retrieveHighscores();
+    displayHighscores();
+}
+
 btnStartQuiz.addEventListener("click", handleStartQuiz);
 divOptions.addEventListener("click", handleOptionClick);
 formInitials.addEventListener("submit", handleFormInitialsSubmit);
 btnGoBack.addEventListener("click", handleGoBack);
-btnClearHighscores.addEventListener("click", handleClearHighscores)
+btnClearHighscores.addEventListener("click", handleClearHighscores);
+anchorViewHighscores.addEventListener("click", handleViewHighscores);

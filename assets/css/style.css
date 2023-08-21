@@ -1,0 +1,20 @@
+:root {
+    --pink: #bd60e7;
+    --purple: #351c75;
+    --orange: #FFA500;
+}
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: var(--pink);
+    font-size: 15pt;
+}
