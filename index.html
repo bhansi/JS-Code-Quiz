@@ -10,10 +10,34 @@
         <p id="timer"></p>
     </header>
 
-    <body>
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
-        <button>Start Quiz</button>
-    </body>
+    <main>
+        <div id="quiz">
+            <h1 id="heading">Coding Quiz Challenge</h1>
+            <p id="rules">Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
+            <div id="options" style="display: none;">
+                <p id="option0"></p>
+                <p id="option1"></p>
+                <p id="option2"></p>
+                <p id="option3"></p>
+            </div>
+            <p id="finalScore" style="display: none;"></p>
+            <form id="initials" style="display: none;">
+                <label for="inputInitials">Enter Initials: </label>
+                <input type="text" id="inputInitials">
+                <button type="submit">Submit</button>
+            </form>
+            <hr style="display: none;">
+            <p id="answerResult" style="display: none;"></p>
+            <button id="btnStartQuiz">Start Quiz</button>
+        </div>
+        <div id="highscores" style="display: none;">
+            <h1>High Scores</h1>
+            <div id="highscoresList"></div>
+            <button id="goBack">Go Back</button>
+            <button id="clearHighscores">Clear Highscores</button>
+        </div>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
