@@ -113,7 +113,7 @@ function startTimer() {
             answered = false;
             questions.splice(questionIndex, 1);
             
-            if(questions.length > 0) {
+            if(questions.length > 0 && takingQuiz) {
                 displayQuestion();
             }
             else {
@@ -204,6 +204,7 @@ function handleOptionClick(event) {
         }
         else {
             timeRemaining = 0;
+            takingQuiz = false;
         }
     }
     
