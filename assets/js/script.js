@@ -130,24 +130,6 @@ function startTimer() {
     }
 }
 
-// Event handlers
-function handleStartQuiz() {
-    if(!takingQuiz) {
-        timer.textContent = "Time: " + timeRemaining;
-        hideRules();
-        hideBtnStartQuiz();
-        populateQuestions();
-        displayQuestion();
-        startTimer();
-        takingQuiz = true;
-    }
-    else {
-        unhideRules();
-        unhideBtnStartQuiz();
-        takingQuiz = false;
-    }
-}
-
 function retrieveHighscores() {
     let storedHighScores = JSON.parse(localStorage.getItem("highscores"));
     if(storedHighScores) {
@@ -186,14 +168,33 @@ function displayHighscores() {
     }
 }
 
+// Event handlers
+function handleStartQuiz() {
+    if(!takingQuiz) {
+        timeRemaining = 75;
+        timer.textContent = "Time: " + timeRemaining;
+        hideRules();
+        hideBtnStartQuiz();
+        populateQuestions();
+        displayQuestion();
+        startTimer();
+        takingQuiz = true;
+    }
+    else {
+        unhideRules();
+        unhideBtnStartQuiz();
+        takingQuiz = false;
+    }
+}
+
 function handleOptionClick(event) {
     if(answered) { return; }
     else { answered = true; }
-
+    
     let playerAnswer = document.querySelector("#" + event.target.id).textContent;
-
+    
     horizonalRule.style.display = "block";
-
+    
     if(playerAnswer === questions[questionIndex].answer) {
         answerResult.textContent = "Correct";
     }
@@ -221,6 +222,7 @@ function handleFormInitialsSubmit(event) {
         hideQuiz();
         unhideHighscores();
         displayHighscores();
+        inputInitials.value = "";
     }
 }
 
