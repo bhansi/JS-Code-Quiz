@@ -79,7 +79,7 @@ function endQuiz() {
 function startTimer() {
     let timerInterval = setInterval(function() {
         
-        // Only decrement this timer if the answerResult is visible to the user
+        // Only decrement this timer if answerResult is visible to the user
         if(horizonalRule.style.display === "block") {
             answerResultTimer--;
         }
@@ -137,7 +137,14 @@ function handleOptionClick(event) {
 
     horizonalRule.style.display = "block";
 
-    answerResult.textContent = playerAnswer === questions[questionIndex].answer ? "Correct" : "Incorrect";
+    if(playerAnswer === questions[questionIndex].answer) {
+        answerResult.textContent = "Correct";
+    }
+    else {
+        answerResult.textContent = "Incorrect";
+        timeRemaining = timeRemaining >= 10 ? timeRemaining - 10 : 0;
+    }
+    
     answerResult.style.display = "block";
 }
 
