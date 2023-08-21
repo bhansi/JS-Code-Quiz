@@ -6,6 +6,8 @@ let rules = document.querySelector("#rules");
 let divOptions = document.querySelector("#options");
 let horizonalRule = document.querySelector("hr");
 let answerResult = document.querySelector("#answerResult");
+let finalScore = document.querySelector("#finalScore");
+let formInitials = document.querySelector("#initials");
 
 // Variables
 let timeRemaining = 75;
@@ -41,23 +43,23 @@ function populateQuestions() {
 function changeHeading(newText) { heading.textContent = newText; }
 
 function hideRules() { rules.style.display = "none"; }
-
 function unhideRules() { rules.style.display = "block"; }
 
 function hideBtnStartQuiz() { btnStartQuiz.style.display = "none"; }
-
 function unhideBtnStartQuiz() { btnStartQuiz.style.display = "inline-block"; }
 
+function hideOptions() { divOptions.style.display = "none"; }
+function unhideOptions() { divOptions.style.display = "block"; }
+
+function hideFormInitials() { formInitials.style.display = "none"; }
+function unhideFormInitials() { formInitials.style.display = "block"; }
+
 function displayOptions() {
-    divOptions.style.display = "block";
+    unhideOptions();
     let optionsList = questions[questionIndex].options;
 
     for(let i = 0; i < optionsList.length; i++) {
         document.querySelector("#option" + i).textContent = optionsList[i];
-        // let option = document.createElement("p");
-        // option.textContent = optionsList[i];
-        // option.id = "option" + i;
-        // divOptions.appendChild(option);
     }
 }
 
@@ -65,6 +67,13 @@ function displayQuestion() {
     questionIndex = Math.floor(Math.random() * questions.length);
     heading.textContent = questions[questionIndex].question;
     displayOptions();
+}
+
+function endQuiz() {
+    takingQuiz = false;
+    hideOptions();
+    changeHeading("All done!");
+    unhideFormInitials();
 }
 
 function startTimer() {
@@ -79,14 +88,21 @@ function startTimer() {
         }
 
         timer.textContent = "Time: " + timeRemaining;
-        
+
         if(answerResultTimer === 0) {
             horizonalRule.style.display = "none";
             answerResult.style.display = "none"
             answerResultTimer = 3;
             answered = false;
             questions.splice(questionIndex, 1);
-            displayQuestion();
+
+            if(questions.length > 0) {
+                displayQuestion();
+            }
+            else {
+                clearInterval(timerInterval);
+                endQuiz();
+            }
         }
         
         if(timeRemaining === 0) {

@@ -11,17 +11,28 @@
     </header>
 
     <main>
-        <h1 id="heading">Coding Quiz Challenge</h1>
-        <p id="rules">Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
-        <div id="options" style="display: none;">
-            <p id="option0"></p>
-            <p id="option1"></p>
-            <p id="option2"></p>
-            <p id="option3"></p>
+        <div id="quiz">
+            <h1 id="heading">Coding Quiz Challenge</h1>
+            <p id="rules">Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
+            <div id="options" style="display: none;">
+                <p id="option0"></p>
+                <p id="option1"></p>
+                <p id="option2"></p>
+                <p id="option3"></p>
+            </div>
+            <p id="finalScore" style="display: none;"></p>
+            <form id="initials" style="display: none;">
+                <label for="">Enter Initials: </label>
+                <input type="text">
+                <button type="submit">Submit</button>
+            </form>
+            <hr style="display: none;">
+            <p id="answerResult" style="display: none;"></p>
+            <button id="btnStartQuiz">Start Quiz</button>
         </div>
-        <hr style="display: none;">
-        <p id="answerResult" style="display: none;"></p>
-        <button id="btnStartQuiz">Start Quiz</button>
+        <div id="highscores" style="display: none;">
+
+        </div>
     </main>
 
     <script src="./assets/js/script.js"></script>
