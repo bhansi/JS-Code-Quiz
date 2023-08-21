@@ -11,6 +11,9 @@ let formInitials = document.querySelector("#initials");
 let inputInitials = document.querySelector("#inputInitials");
 let divQuiz = document.querySelector("#quiz");
 let divHighscores = document.querySelector("#highscores");
+let divHighscoresList = document.querySelector("#highscoresList");
+let btnGoBack = document.querySelector("#goBack");
+let btnClearHighscores = document.querySelector("#clearHighscores");
 
 // Variables
 let timeRemaining = 75;
@@ -36,7 +39,7 @@ function populateQuestions() {
     });
         
     questions.push({
-        question: "The condition of an if statement is stored in __________",
+        question: "The condition of an if statement is stored in __________.",
         options: ["Square brackets", "Curly braces", "Parenthesis", "Angle brackets"],
         answer: "Parenthesis"
     });
@@ -102,14 +105,14 @@ function startTimer() {
         }
 
         timer.textContent = "Time: " + timeRemaining;
-
+        
         if(answerResultTimer === 0) {
             horizonalRule.style.display = "none";
             answerResult.style.display = "none"
             answerResultTimer = 3;
             answered = false;
             questions.splice(questionIndex, 1);
-
+            
             if(questions.length > 0) {
                 displayQuestion();
             }
@@ -118,11 +121,13 @@ function startTimer() {
                 endQuiz();
             }
         }
-        
-        if(timeRemaining === 0) {
-            clearInterval(timerInterval);
-        }
     }, 1000);
+    
+    if(timeRemaining === 0) {
+        console.log("Here");
+        clearInterval(timerInterval);
+        endQuiz();
+    }
 }
 
 // Event handlers
@@ -177,7 +182,7 @@ function displayHighscores() {
     for(let i = 0; i < highscores.scoresList.length; i++) {
         let child = document.createElement("p");
         child.textContent = highscores.initialsList[i] + " - " + highscores.scoresList[i];
-        divHighscores.appendChild(child);
+        divHighscoresList.appendChild(child);
     }
 }
 
@@ -194,7 +199,12 @@ function handleOptionClick(event) {
     }
     else {
         answerResult.textContent = "Incorrect";
-        timeRemaining = timeRemaining >= 10 ? timeRemaining - 10 : 0;
+        if(timeRemaining >= 75) {
+            timeRemaining = timeRemaining - 75;
+        }
+        else {
+            timeRemaining = 0;
+        }
     }
     
     answerResult.style.display = "block";
@@ -213,6 +223,26 @@ function handleFormInitialsSubmit(event) {
     }
 }
 
+function handleGoBack() {
+    divHighscoresList.innerHTML = "";
+    timer.textContent = "";
+    changeHeading("Coding Quiz Challenge");
+    hideHighscores();
+    hideFormInitials();
+    unhideRules();
+    unhideBtnStartQuiz();
+    unhideQuiz();
+}
+
+function handleClearHighscores() {
+    divHighscoresList.innerHTML = "";
+    highscores.initialsList = [];
+    highscores.scoresList = [];
+    localStorage.clear();
+}
+
 btnStartQuiz.addEventListener("click", handleStartQuiz);
 divOptions.addEventListener("click", handleOptionClick);
 formInitials.addEventListener("submit", handleFormInitialsSubmit);
+btnGoBack.addEventListener("click", handleGoBack);
+btnClearHighscores.addEventListener("click", handleClearHighscores)
