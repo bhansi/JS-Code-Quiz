@@ -122,13 +122,13 @@ function startTimer() {
                 endQuiz();
             }
         }
+        
+        if(timeRemaining === 0) {
+            console.log("Here");
+            clearInterval(timerInterval);
+            endQuiz();
+        }
     }, 1000);
-    
-    if(timeRemaining === 0) {
-        console.log("Here");
-        clearInterval(timerInterval);
-        endQuiz();
-    }
 }
 
 function retrieveHighscores() {

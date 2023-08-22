@@ -2,10 +2,17 @@
     --pink: #bd60e7;
     --purple: #351c75;
     --orange: #FFA500;
+    --btnColor: white;
+    --answerResultColor: gray;
 }
 
 body {
     font-family:Arial, Helvetica, sans-serif;
+    padding: 50px;
+}
+
+header *, #rules, button, #answerResult {
+    font-size: 15pt;
 }
 
 a:hover {
@@ -16,5 +23,35 @@ a:hover {
 a {
     text-decoration: none;
     color: var(--pink);
-    font-size: 15pt;
+}
+
+#timer {
+    float: right;
+}
+
+#quiz {
+    text-align: center;
+}
+
+h1 {
+    font-size: 35pt;
+}
+
+button:hover {
+    background-color: var(--pink);
+}
+
+button {
+    background-color: var(--purple);
+    color: var(--btnColor);
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+#answerResult {
+    font-style: italic;
+}
+
+hr, #answerResult {
+    color: var(--answerResultColor);
 }
