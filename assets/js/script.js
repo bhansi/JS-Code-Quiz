@@ -15,6 +15,7 @@ let divHighscoresList = document.querySelector("#highscoresList");
 let btnGoBack = document.querySelector("#goBack");
 let btnClearHighscores = document.querySelector("#clearHighscores");
 let anchorViewHighscores = document.querySelector("#viewHighscores");
+let header = document.querySelector("#header");
 
 // Variables
 let timeRemaining = 75;
@@ -49,6 +50,30 @@ function populateQuestions() {
         question: "String values must be enclosed within __________ when assigning values.",
         options: ["Single quotes", "Double quotes", "Hyphens", "Periods"],
         answer: "Double quotes"
+    });
+        
+    questions.push({
+        question: "Function declarations begin with the __________ keyword.",
+        options: ["function", "fun", "let", "var"],
+        answer: "function"
+    });
+        
+    questions.push({
+        question: "The __________ keyword(s) can be used to declare a variable.",
+        options: ["var", "fun", "let", "Both var and let"],
+        answer: "Both var and let"
+    });
+        
+    questions.push({
+        question: "How can the variable x be incremented by 1?",
+        options: ["x++;", "x += 1;", "x = x + 1;", "All of the above"],
+        answer: "All of the above"
+    });
+        
+    questions.push({
+        question: "Which command is used to print to the console?",
+        options: ["document.print()", "document.log()", "console.print()", "console.log()"],
+        answer: "console.log()"
     });
 }
 
@@ -88,6 +113,7 @@ function displayQuestion() {
 }
 
 function endQuiz() {
+    anchorViewHighscores.style.visibility = "hidden";
     takingQuiz = false;
     divQuiz.style.textAlign = "center";
     hideOptions();
@@ -113,7 +139,6 @@ function startTimer() {
             answerResult.style.display = "none"
             answered = false;
             questions.splice(questionIndex, 1);
-            console.log("Here");
             
             if(questions.length > 0 && takingQuiz) {
                 displayQuestion();
@@ -172,6 +197,7 @@ function displayHighscores() {
 // Event handlers
 function handleStartQuiz() {
     if(!takingQuiz) {
+        anchorViewHighscores.style.visibility = "hidden";
         timeRemaining = 75;
         timer.textContent = "Time: " + timeRemaining;
         divQuiz.style.textAlign = "left";
@@ -203,8 +229,8 @@ function handleOptionClick(event) {
     }
     else {
         answerResult.textContent = "Incorrect";
-        if(timeRemaining >= 75) {
-            timeRemaining = timeRemaining - 75;
+        if(timeRemaining >= 10) {
+            timeRemaining = timeRemaining - 10;
         }
         else {
             timeRemaining = 0;
@@ -232,6 +258,8 @@ function handleFormInitialsSubmit(event) {
 function handleGoBack() {
     divHighscoresList.innerHTML = "";
     timer.textContent = "";
+    anchorViewHighscores.style.visibility = "visible";
+    header.style.visibility = "visible";
     changeHeading("Coding Quiz Challenge");
     hideHighscores();
     hideFormInitials();
@@ -251,11 +279,13 @@ function handleClearHighscores() {
 
 function handleViewHighscores() {
     hideQuiz();
+    header.style.visibility = "hidden";
     unhideHighscores();
     retrieveHighscores();
     displayHighscores();
 }
 
+// Adding event listeners
 btnStartQuiz.addEventListener("click", handleStartQuiz);
 divOptions.addEventListener("click", handleOptionClick);
 formInitials.addEventListener("submit", handleFormInitialsSubmit);

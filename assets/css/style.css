@@ -12,7 +12,7 @@ body {
     padding: 20px 50px;
 }
 
-header *, #rules, button, #answerResult {
+header *, #rules, button, #answerResult, #initials * {
     font-size: 15pt;
 }
 
@@ -88,4 +88,5 @@ hr, #answerResult {
     background-color: var(--highscoreBackgroundColor);
     padding: 5px 8px;
     margin-bottom: 5px;
+    font-family: monospace;
 }
