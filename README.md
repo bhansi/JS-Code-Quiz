@@ -6,13 +6,13 @@ This website is a simple JavaScript quiz with a functioning, locally-stored lead
 
 ## Usage
 
-[!Landing page](./assets/images/landing-page.png)
+![Landing page](./assets/images/landing-page.png)
 
-[!Question page](./assets/images/question-page.png)
+![Question page](./assets/images/question-page.png)
 
-[!Quiz done page](./assets/images/Quiz-done-page.png)
+![Quiz done page](./assets/images/Quiz-done-page.png)
 
-[!Highscores page](./assets/images/highscores-page.png)
+![Highscores page](./assets/images/highscores-page.png)
 
 ## URL
 
