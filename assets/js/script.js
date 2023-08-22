@@ -89,6 +89,7 @@ function displayQuestion() {
 
 function endQuiz() {
     takingQuiz = false;
+    divQuiz.style.textAlign = "center";
     hideOptions();
     changeHeading("All done!");
     unhideFormInitials();
@@ -107,12 +108,12 @@ function startTimer() {
 
         timer.textContent = "Time: " + timeRemaining;
         
-        if(answerResultTimer === 0) {
+        if(answerResultTimer === 0 && answered) {
             horizonalRule.style.display = "none";
             answerResult.style.display = "none"
-            answerResultTimer = 3;
             answered = false;
             questions.splice(questionIndex, 1);
+            console.log("Here");
             
             if(questions.length > 0 && takingQuiz) {
                 displayQuestion();
@@ -123,8 +124,7 @@ function startTimer() {
             }
         }
         
-        if(timeRemaining === 0) {
-            console.log("Here");
+        if(timeRemaining === 0 && answerResultTimer === 0) {
             clearInterval(timerInterval);
             endQuiz();
         }
@@ -154,7 +154,7 @@ function addScore(initials, score) {
         if(score > highscores.scoresList[i]) {
             highscores.initialsList.splice(i, 0, initials);
             highscores.scoresList.splice(i, 0, score);
-            break;
+            return;
         }
     }
     highscores.initialsList.push(initials);
@@ -174,6 +174,7 @@ function handleStartQuiz() {
     if(!takingQuiz) {
         timeRemaining = 75;
         timer.textContent = "Time: " + timeRemaining;
+        divQuiz.style.textAlign = "left";
         hideRules();
         hideBtnStartQuiz();
         populateQuestions();
@@ -192,6 +193,7 @@ function handleOptionClick(event) {
     if(answered) { return; }
     else { answered = true; }
     
+    answerResultTimer = 3;
     let playerAnswer = document.querySelector("#" + event.target.id).textContent;
     
     horizonalRule.style.display = "block";
@@ -233,6 +235,8 @@ function handleGoBack() {
     changeHeading("Coding Quiz Challenge");
     hideHighscores();
     hideFormInitials();
+    horizonalRule.style.display = "none";
+    answerResult.style.display = "none";
     unhideRules();
     unhideBtnStartQuiz();
     unhideQuiz();
